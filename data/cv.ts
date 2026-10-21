@@ -28,9 +28,19 @@ export const education = {
 export const experience = [
   {
     company: "Cognizant Technology Solutions",
-    role: "Programmer Analyst Trainee",
+    role: "Programmer Analyst ",
     place: "Kochi",
-    period: "08/2025 – Present",
+    period: "08/2026 – Present",
+    points: [
+      "Attained proficiency in the MEAN stack (MongoDB, Express.js, Angular, Node.js) through comprehensive training in the Digital Engineering service line.",
+      "Working as a Full Stack Developer for a client, building end-to-end applications using Angular and the .NET framework.",
+    ],
+  },
+  {
+    company: "Cognizant Technology Solutions",
+    role: "Programmer Analyst Trainee ",
+    place: "Kochi",
+    period: "08/2025 – 08/2026",
     points: [
       "Attained proficiency in the MEAN stack (MongoDB, Express.js, Angular, Node.js) through comprehensive training in the Digital Engineering service line.",
       "Working as a Full Stack Developer for a client, building end-to-end applications using Angular and the .NET framework.",

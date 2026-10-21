@@ -9,7 +9,6 @@ export const profile = {
   location: "Kerala, India",
   email: "rohit.psudarsanan@gmail.com",
   // Phone intentionally left off the public site; add it back here if you want it shown.
-  // TODO: replace with your real profile URLs.
   linkedin: "https://www.linkedin.com/in/rohit-pradeep-sudarsanan/",
   github: "https://github.com/red-malone",
   summary:

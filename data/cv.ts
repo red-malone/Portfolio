@@ -31,8 +31,8 @@ export const experience = [
     place: "Kochi",
     period: "08/2026 – Present",
     points: [
-      "Attained proficiency in the MEAN stack (MongoDB, Express.js, Angular, Node.js) through comprehensive training in the Digital Engineering service line.",
-      "Working as a Full Stack Developer for a client, building end-to-end applications using Angular and the .NET framework.",
+       "Working as a Full Stack Developer for a client, building end-to-end applications using Angular and the .NET framework and with React and Python frameworks to deliver solutions.",
+
     ],
   },
   {

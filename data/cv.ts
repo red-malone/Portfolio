@@ -134,5 +134,5 @@ export const certificates = [
 export const achievements = [
   "2nd Place, Hackathon at Model Engineering College",
   "Volunteer, TechFOSS & ADVAY College Fests",
-  "9-month software development internship completed",
+
 ];

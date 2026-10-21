@@ -9,7 +9,6 @@ export const profile = {
   location: "Kerala, India",
   email: "rohit.psudarsanan@gmail.com",
   // Phone intentionally left off the public site; add it back here if you want it shown.
-  // TODO: replace with your real profile URLs.
   linkedin: "https://www.linkedin.com/in/rohit-pradeep-sudarsanan/",
   github: "https://github.com/red-malone",
   summary:
@@ -32,8 +31,8 @@ export const experience = [
     place: "Kochi",
     period: "08/2026 – Present",
     points: [
-      "Attained proficiency in the MEAN stack (MongoDB, Express.js, Angular, Node.js) through comprehensive training in the Digital Engineering service line.",
-      "Working as a Full Stack Developer for a client, building end-to-end applications using Angular and the .NET framework.",
+       "Working as a Full Stack Developer for a client, building end-to-end applications using Angular and the .NET framework and with React and Python frameworks to deliver solutions.",
+
     ],
   },
   {

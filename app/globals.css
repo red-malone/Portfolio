@@ -1,0 +1,346 @@
+/* =========================================================================
+   THEME TOKENS
+   Every colour on the site comes from these variables. The light theme is
+   defined once on :root; dark mode only overrides the same variable names.
+   ========================================================================= */
+:root {
+  /* Light: warm paper with coffee ink */
+  --bg: #faf6f0;         /* off-white paper */
+  --surface: #f3ebe0;    /* cards, slightly darker paper */
+  --text: #3b2a1e;       /* coffee brown ink */
+  --muted: #7a6250;      /* secondary text */
+  --accent: #8b5e3c;     /* mocha — links, numerals */
+  --accent-soft: #c8a27a;/* latte — rules, ornaments */
+  --line: #e2d3bf;       /* hairline borders */
+  --chip: #ece0cf;       /* skill tags */
+  color-scheme: light;
+}
+
+/* Dark: espresso background with cream ink.
+   Applied when the OS prefers dark AND the visitor hasn't forced light with the toggle... */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1410;
+    --surface: #261c16;
+    --text: #f1e6d6;
+    --muted: #bba68f;
+    --accent: #d4a373;
+    --accent-soft: #a47551;
+    --line: #3a2b21;
+    --chip: #33261d;
+    color-scheme: dark;
+  }
+}
+/* ...or whenever the toggle has forced dark. (Same values as above.) */
+:root[data-theme="dark"] {
+  --bg: #1c1410;
+  --surface: #261c16;
+  --text: #f1e6d6;
+  --muted: #bba68f;
+  --accent: #d4a373;
+  --accent-soft: #a47551;
+  --line: #3a2b21;
+  --chip: #33261d;
+  color-scheme: dark;
+}
+
+/* =========================================================================
+   BASE
+   ========================================================================= */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  transition: background-color 0.3s, color 0.3s; /* smooth theme switch */
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+a:hover { border-bottom-color: currentColor; }
+
+/* Visible keyboard focus for accessibility */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.muted { color: var(--muted); }
+
+/* =========================================================================
+   TOP BAR
+   Sticky nav that stays readable over content via a translucent background.
+   ========================================================================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem clamp(1rem, 4vw, 2.5rem);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  font-variant: small-caps;   /* classical small-caps labels */
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+}
+.topbar nav a { color: var(--text); }
+.topbar nav a:hover { color: var(--accent); }
+
+.theme-toggle {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+/* Show the moon in light mode (click → dark) and the sun in dark mode (click → light). */
+.icon-sun { display: none; }
+:root[data-theme="dark"] .icon-moon { display: none; }
+:root[data-theme="dark"] .icon-sun { display: inline; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .icon-moon { display: none; }
+  :root:not([data-theme="light"]) .icon-sun { display: inline; }
+}
+
+/* =========================================================================
+   PAGE LAYOUT
+   A single centred column, like a printed page.
+   ========================================================================= */
+.page {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+/* ---------- Masthead ---------- */
+.masthead {
+  text-align: center;
+  padding: clamp(3rem, 10vw, 6rem) 0 1rem;
+}
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.masthead h1 {
+  font-size: clamp(2.4rem, 7vw, 4.25rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.masthead-title {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: var(--accent);
+}
+.masthead-meta {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Fleuron ornament flanked by thin rules: ——— ❦ ——— */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 18rem;
+  margin: 2rem auto 0;
+  color: var(--accent-soft);
+  font-size: 1.4rem;
+}
+.ornament::before, .ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--accent-soft);
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding: 3rem 0 1rem;
+  scroll-margin-top: 4rem; /* keep headings clear of the sticky top bar when jumping */
+}
+.section-title {
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--accent-soft);
+}
+.numeral {
+  color: var(--accent);
+  font-style: italic;
+  margin-right: 0.25rem;
+}
+.lead {
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+}
+
+/* ---------- Dated entries (experience, education, leadership) ---------- */
+.entry {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.entry-period {
+  margin: 0.2rem 0 0;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.entry-heading { font-size: 1.45rem; }
+.entry-sub {
+  margin: 0.1rem 0 0;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+.entry-points {
+  margin: 0.6rem 0 0;
+  padding-left: 1.1rem;
+}
+.entry-points li { margin-bottom: 0.35rem; }
+.entry-points li::marker { color: var(--accent-soft); }
+
+/* ---------- Project cards ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1.25rem;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent-soft);
+  padding: 1.5rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-top-color: var(--accent);
+}
+.card h3 { font-size: 1.5rem; margin-top: 0.2rem; }
+.card-tag {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* ---------- Skills ---------- */
+.skills { margin: 0; }
+.skill-row {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0.5rem 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+.skill-row dt {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.skill-row dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chip {
+  background: var(--chip);
+  border: 1px solid var(--line);
+  padding: 0.1rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+/* ---------- Certificates & achievements ---------- */
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem 2.5rem;
+}
+.plain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.plain-list li {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.plain-list strong {
+  display: block;
+  font-weight: 600;
+}
+.plain-list .muted { font-size: 0.9rem; font-style: italic; }
+
+/* ---------- Contact ---------- */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  font-size: 1.15rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* =========================================================================
+   SMALL SCREENS
+   Two-column entries stack: dates move above the details.
+   ========================================================================= */
+@media (max-width: 640px) {
+  .entry, .skill-row { grid-template-columns: 1fr; }
+  .topbar nav { gap: 0.25rem 0.9rem; font-size: 0.95rem; }
+}
+
+/* Respect users who turn off animations in their OS settings. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
